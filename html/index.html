@@ -28,12 +28,12 @@
 	Create Survey</a></p>
 	<HR>
 	
-	{% if titles %}
+	{% if dic %}
 	<h3>Recommended Surveys</h3>
-	   {% for t in titles %}
+	   {% for key, value in dic.items %}
 	
-		  <p><a href="/vote_sy?title={{t}}">
-		  {{t}}</a></p>
+		  <p><a href="/vote_sy?key={{key}}">
+		  {{value}}</a></p>
 	   {% endfor %}
 	{% endif %}
 	

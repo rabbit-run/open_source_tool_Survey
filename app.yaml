@@ -4,5 +4,15 @@ runtime: python
 api_version: 1
 
 handlers:
-- url: .*
-  script: main.py
+
+- url: .*/index\.html
+  script: index.py
+
+- url: /create_sy
+  script: index.py
+  
+- url: /manage_sy
+  script: index.py 
+
+- url: /vote_sy.*
+  script: index.py

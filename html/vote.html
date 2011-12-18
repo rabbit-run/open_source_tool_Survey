@@ -12,18 +12,20 @@
 <body>
 	<h1>{{title}}</h1>
 	<HR>
-	<form method = 'post' acrtion = '/vote_py'>
-	{% for key, value in ques.items %}
-		<h2>{{key}}</h2>
-		{% for v in value %}
-			<input type = "radio" name = "{{key}}" value = {{v}}>
-			{{v}}<br>
-			
+		
+	<form method = 'post' action = '/vote_sy'>
+		{% for key, value in ques.items %}
+			<h2>{{key}}</h2>
+			{% for v in value %}
+				<input type = "radio" name = "{{key}}" value = {{v}}>
+				{{v}}<br>
+				
+			{% endfor %}
+			<HR>
 		{% endfor %}
-		<HR>
-	{% endfor %}
-	<input type = "hidden" name ='title' value = '{{ title }}' />
-	<input type="submit" />
+		<input type = "hidden" name ='key' value = '{{ survey_key }}' />
+		<input type = "hidden" name ='title' value = '{{ title }}' />
+		<input type="submit" />
 	</form>
 </body>
 </html>
