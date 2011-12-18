@@ -26,9 +26,16 @@
 	
 	<p><a href="/create_sy">
 	Create Survey</a></p>
+	<HR>
 	
+	{% if titles %}
+	<h3>Recommended Surveys</h3>
+	   {% for t in titles %}
 	
-	
+		  <p><a href="/vote_sy?title={{t}}">
+		  {{t}}</a></p>
+	   {% endfor %}
+	{% endif %}
 	
 </body>
 </html>

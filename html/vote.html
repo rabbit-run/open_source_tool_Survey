@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>vote</title>
+	<meta name="generator" content="TextMate http://macromates.com/">
+	<meta name="author" content="Zehua Mai">
+	<!-- Date: 2011-12-18 -->
+</head>
+<body>
+	<h1>{{title}}</h1>
+	<HR>
+	<form method = 'post' acrtion = '/vote_py'>
+	{% for key, value in ques.items %}
+		<h2>{{key}}</h2>
+		{% for v in value %}
+			<input type = "radio" name = "{{key}}" value = {{v}}>
+			{{v}}<br>
+			
+		{% endfor %}
+		<HR>
+	{% endfor %}
+	<input type = "hidden" name ='title' value = '{{ title }}' />
+	<input type="submit" />
+	</form>
+</body>
+</html>
