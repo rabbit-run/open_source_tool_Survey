@@ -17,7 +17,7 @@
 		{% for key, value in ques.items %}
 			<h2>{{key}}</h2>
 			{% for v in value %}
-				<input type = "radio" name = "{{key}}" value = {{v}}>
+				<input type = "radio" name = "{{key}}" value = '{{v}}'>
 				{{v}}<br>
 				
 			{% endfor %}

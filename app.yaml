@@ -5,6 +5,9 @@ api_version: 1
 
 handlers:
 
+- url: /javascripts
+  static_dir: javascripts
+  
 - url: .*/index\.html
   script: index.py
 
@@ -15,4 +18,10 @@ handlers:
   script: index.py 
 
 - url: /vote_sy.*
+  script: index.py
+
+- url: /results.*
+  script: index.py
+
+- url: /view_all
   script: index.py

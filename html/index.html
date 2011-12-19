@@ -11,6 +11,7 @@
 	<!-- Date: 2011-12-17 -->
 </head>
 <body>
+	<div align="center">
 	<p><h1>Happy Survey</h1></p>
 	
 	{% if name %}
@@ -29,7 +30,7 @@
 	<HR>
 	
 	{% if dic %}
-	<h3>Recommended Surveys</h3>
+	<h3>Most Recent Surveys</h3>
 	   {% for key, value in dic.items %}
 	
 		  <p><a href="/vote_sy?key={{key}}">
@@ -37,5 +38,9 @@
 	   {% endfor %}
 	{% endif %}
 	
+	<form action='/view_all' method='post'>
+		<input type = 'submit' value='View All Surveys'/>
+	</form>
+	</div>
 </body>
 </html>

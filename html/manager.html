@@ -10,15 +10,28 @@
 	<!-- Date: 2011-12-18 -->
 </head>
 <body>
-	<h1>Manage Survey</h2>
+	<div align="center">
+	<h1>Manager</h2>
+	<HR>
+	
+	{% if surveys %}
 	<form method='post' action='/manage_sy'>
-	{% for title in titles %}
-	    <input type="radio" name="title" value="{{title}}" /> {{title}}
+	
+	{% for key, value in surveys.items %}
+	    <input type="radio" name="key" value="{{key}}" /> {{value}}<br>
 	{% endfor %}
 		<br><br>
-		<input type="submit" name='submit' value="edit" />
-		<input type="submit" name='submit' value="check result" />
+		<input type="submit" name='submit' value="show result" />
+		<input type="submit" name='submit' value="delete" />
 	</form>
-		
+	{% else %}
+		You haven't create any survey yet.
+		<p><a href="/create_sy">
+		  create one now</a></p>
+	{% endif %}
+	<HR>
+		<p><a href="/index.html">
+		  back to main page</a></p>
+	</div>
 </body>
 </html>
