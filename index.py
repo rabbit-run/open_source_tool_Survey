@@ -50,10 +50,9 @@ def print_err(err_msg):
 
 def most_recent_survey():
     query = db.Query(Survey)
-    surveys = query.order('-create_time')
+    surveys = query.order('-create_time')[:5]
     dic = {}
-    for i in range(5):
-        s = surveys[i]
+    for s in surveys:
         if s != None:
             key = '%s:%s' % (s.user.nickname(), s.title)
             print key
@@ -213,20 +212,21 @@ class Manager(webapp.RequestHandler):
     def post(self):
         user = users.get_current_user()
         params = self.request.params
-        _key = params['key']
-        if not user:
-            self.redirect(users.create_login_url(self.request.uri))
-        
-        if params['submit'] == 'show result':
-            self.redirect('/results?key='+_key)
-#        elif params['submit'] == 'edit':
-#            # edit survey
-#            _key = params['key']
-#            self.redirect('/edit_sy?key='+_key)
-        elif params['submit'] == 'delete':
-            survey = Survey.get_by_key_name(_key)
-            survey.delete()
-            self.redirect('/index.html')
+        if not params.has_key('key'):
+            err_msg = 'Sorry, must specify a survey.'
+            response = print_err(err_msg)
+            self.response.out.write(response)
+        else:    
+            _key = params['key']
+            if not user:
+                self.redirect(users.create_login_url(self.request.uri))
+            
+            if params['submit'] == 'show result':
+                self.redirect('/results?key='+_key)
+            elif params['submit'] == 'delete':
+                survey = Survey.get_by_key_name(_key)
+                survey.delete()
+                self.redirect('/index.html')
         
     
 class VoteHandler(webapp.RequestHandler):
@@ -274,7 +274,8 @@ class VoteHandler(webapp.RequestHandler):
         
 class ShowResult(webapp.RequestHandler):
     def get(self):
-        key = self.request.params['key']
+        params = self.request.params
+        key = params['key']
         response =  cgi_results(key)
         self.response.out.write(response) 
         
@@ -288,13 +289,14 @@ class ViewAll(webapp.RequestHandler):
 
 def main():
 	app = webapp.WSGIApplication([
-		(r'.*/index\.html$',MainPage),
+		
 		(r'/create_sy', CreateSyHandler),
 		(r'/manage_sy', Manager),
 		(r'/view_all', ViewAll),
 		(r'/vote_sy.*', VoteHandler),
 		(r'/results.*', ShowResult),
 #		(r'/edit_sy', EditHandler),
+        (r'.*',MainPage),
 		], debug = True);
           
 	run_wsgi_app(app)

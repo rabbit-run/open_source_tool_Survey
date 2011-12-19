@@ -8,6 +8,7 @@
 	<meta name="generator" content="TextMate http://macromates.com/">
 	<meta name="author" content="Zehua Mai">
 	<!-- Date: 2011-12-18 -->
+	<script type="text/javascript" src="/javascripts/form_validation.js"></script>
 </head>
 <body>
 	<div align="center">
@@ -15,7 +16,8 @@
 	<HR>
 	
 	{% if surveys %}
-	<form method='post' action='/manage_sy'>
+	<form name='manage_form' method='post' action='/manage_sy'
+	onsubmit="return validateManageForm()">
 	
 	{% for key, value in surveys.items %}
 	    <input type="radio" name="key" value="{{key}}" /> {{value}}<br>
